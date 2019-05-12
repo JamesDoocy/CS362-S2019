@@ -5,14 +5,23 @@
 
 char inputChar()
 {
-    // TODO: rewrite this function
-    return ' ';
+    char newChar = ((random() % 94) + 32);
+    return newChar;
 }
 
 char *inputString()
 {
-    // TODO: rewrite this function
-    return "";
+    int i;
+    char s[6];
+    s[5] = '\0';
+    for (i = 0; i < 5; i++) {
+        if (random() % 2){
+            s[i] = ((random() % 5) + 101);
+        } else {
+            s[i] = ((random() % 5) + 114);
+        }
+    }
+    return s;
 }
 
 void testme()
@@ -55,3 +64,4 @@ int main(int argc, char *argv[])
     testme();
     return 0;
 }
+
