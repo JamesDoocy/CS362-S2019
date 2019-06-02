@@ -646,7 +646,7 @@ int getCost(int cardNumber)
 // refactored smithy code called from cardEffect
 int smithyRefactor(struct gameState *state, int currentPlayer, int handPos){
 	//+3 Cards
-      for (int i = 0; i <= 3; i++)
+      for (int i = 0; i < 3; i++)
 	{
 	  drawCard(currentPlayer, state);
 	}
@@ -667,13 +667,12 @@ int adventurerRefactor(struct gameState *state, int currentPlayer, int z){
 	}
 	drawCard(currentPlayer, state);
 	cardDrawn = state->hand[currentPlayer][state->handCount[currentPlayer]-1];//top card of hand is most recently drawn card.
-	if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold || cardDrawn == cutpurse)
+	if (cardDrawn == copper || cardDrawn == silver || cardDrawn == gold)
 	  drawntreasure++;
 	else{
 	  temphand[z]=cardDrawn;
 	  state->handCount[currentPlayer]--; //this should just remove the top card (the most recently drawn one).
 	  z++;
-	  return 0;
 	}
       }
 	while(z-1>=0){
@@ -705,7 +704,7 @@ int treasureMapRefactor(struct gameState *state, int currentPlayer, int handPos)
       index = -1;
       for (i = 0; i < state->handCount[currentPlayer]; i++)
 	{
-	  if (state->hand[currentPlayer][i] == treasure_map && i == handPos)
+	  if (state->hand[currentPlayer][i] == treasure_map && i != handPos)
 	    {
 	      index = i;
 	      break;
@@ -728,7 +727,7 @@ int treasureMapRefactor(struct gameState *state, int currentPlayer, int handPos)
 	}
 			
       //no second treasure_map found in hand
-      return 1;
+      return -1;
 }
 
 // refactored ambassador code called from cardEffect
